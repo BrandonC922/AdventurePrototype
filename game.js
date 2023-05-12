@@ -209,6 +209,43 @@ class Room4 extends AdventureScene {
     }
 
     onEnter() {
+        let sledgehammer = this.add.text(this.w * 0.5, this.w * 0.1, " 🪨  Sledgehammer")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+            this.showMessage("This could come in handy")
+        })
+        .on('pointerdown', () => {
+            this.showMessage("You pick up the sledgehammer.");
+            this.gainItem('sledgehammer');
+            this.tweens.add({
+                targets: sledgehammer,
+                y: `-=${2 * this.s}`,
+                alpha: { from: 1, to: 0 },
+                duration: 500,
+                onComplete: () => sledgehammer.destroy()
+            });
+        })
+        let glass = this.add.text(this.w * 0.1, this.w * 0.15, "Glass Box")
+        .setFontSize(this.s * 2)
+        .setInteractive()
+        .on('pointerover', () => {
+            if (this.hasItem("sledgehammer")) {
+                this.showMessage("Destroy Glass Case");
+            } else {
+                this.showMessage("Looks like something usefull inside.");
+            }
+        })
+        .on('pointerdown', () => {
+            if (this.hasItem("sledgehammer")) {
+                this.loseItem("sledgehammer");
+                this.showMessage("*shatter*");
+                glass.setText("broken glass");
+                this.gainItem('Trident');
+            }
+        })
+
+        
    
     }
 }
