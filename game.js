@@ -197,29 +197,22 @@ class Room3 extends AdventureScene {
                     this.showMessage("*Cerberus moves away*");
                     dogo.setText("Hidden Door");
                     this.showMessage("Go through hidden Door")
-                    //this.gotoScene('demo2');
+                    this.gotoScene('Room4');
                 }
             })
-        let Gate = this.add.text(this.w * 0.3, this.w * 0.4, " Gate")
-            .setFontSize(this.s * 2)
-            .setInteractive()
-            .on('pointerover', () => {
-                 if (this.hasItem("key")) {
-                    this.showMessage("you've got the key");
-                } else {
-                    this.showMessage("You need a key to unlock.");
-                    }
-            })
-            .on('pointerdown', () => {
-                if (this.hasItem("key")) {
-                    this.loseItem("key");
-                    this.showMessage("*Brrk*");
-                    Gate.setText(" Gate opens");
-                    this.gotoScene('Room3');
-                 }
-            })
+        
     }
 }
+class Room4 extends AdventureScene {
+    constructor() {
+        super("Room4", "Throne Room");
+    }
+
+    onEnter() {
+   
+    }
+}
+
 
 class Intro extends Phaser.Scene {
     constructor() {
@@ -254,7 +247,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Demo1, Demo2, Room3, Outro],
+    scene: [Intro, Demo1, Demo2, Room3, Room4, Outro],
     title: "Adventure Game",
 });
 
