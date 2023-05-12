@@ -244,8 +244,47 @@ class Room4 extends AdventureScene {
                 this.gainItem('Trident');
             }
         })
+        let Throne = this.add.text(this.w * 0.3, this.w * 0.4, "⛵ Throne")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("bones")) {
+                    this.showMessage("Use the bones to distract Cerberus");
+                } else {
+                    this.showMessage("Looks Like it's missing a piece");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("Trident")) {
+                    this.loseItem("Trident");
+                    this.showMessage("*You place the Trident*");
+                    Throne.setText("Throne and Trident");
+                    this.showMessage("A Gem magically appears in your hand")
+                    this.gainItem("gem");
+                    //this.gotoScene('Room4');
+                }
+            })
 
-        
+        let Alter = this.add.text(this.w * 0.1, this.w * 0.8, "⛵ Alter")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("Gem")) {
+                    this.showMessage("It looks like it belongs here");
+                } else {
+                    this.showMessage("Looks Like it needs something");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("gem")) {
+                    this.loseItem("gem");
+                    this.showMessage("*You place the gem*");
+                    Alter.setText("Sacrifice made");
+                    this.showMessage("A magical door appears")
+                    this.gainItem("gem");
+                    //this.gotoScene('Room4');
+                }
+            })
    
     }
 }
