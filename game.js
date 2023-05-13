@@ -109,7 +109,7 @@ class Demo1 extends AdventureScene {
 
 class Demo2 extends AdventureScene {
     constructor() {
-        super("demo2", "The second room has a long name (it truly does).");
+        super("demo2", "Guarded Room");
     }
     onEnter() {
         let ghost = this.add.text(this.w * 0.3, this.w * 0.3, "👻 Lost Soul")
@@ -146,7 +146,7 @@ class Demo2 extends AdventureScene {
             });
         })
 
-        let demon = this.add.text(this.w * 0.1, this.w * 0.15, "Demon with a Key")
+        let demon = this.add.text(this.w * 0.1, this.w * 0.15, "👹🔑Demon with a Key")
         .setFontSize(this.s * 2)
         .setInteractive()
         .on('pointerover', () => {
@@ -164,7 +164,7 @@ class Demo2 extends AdventureScene {
                 this.gainItem('key');
             }
         })
-        let Gate = this.add.text(this.w * 0.1, this.w * 0.25, " Gate")
+        let Gate = this.add.text(this.w * 0.1, this.w * 0.25, "🚪 Gate")
         .setFontSize(this.s * 2)
         .setInteractive()
         .on('pointerover', () => {
@@ -188,7 +188,7 @@ class Demo2 extends AdventureScene {
 }
 class Room3 extends AdventureScene {
     constructor() {
-        super("Room3");
+        super("Room3", "Cerberus");
     }
 
     onEnter() {
@@ -209,7 +209,7 @@ class Room3 extends AdventureScene {
                 onComplete: () => rock.destroy()
             });
         })
-        let skeleton = this.add.text(this.w * 0.1, this.w * 0.15, "skeleton")
+        let skeleton = this.add.text(this.w * 0.1, this.w * 0.15, "💀🦴skeleton")
         .setFontSize(this.s * 2)
         .setInteractive()
         .on('pointerover', () => {
@@ -223,11 +223,11 @@ class Room3 extends AdventureScene {
             if (this.hasItem("rock")) {
                 this.loseItem("rock");
                 this.showMessage("*crack*");
-                skeleton.setText("salvaged bones ");
+                skeleton.setText("💀 ");
                 this.gainItem('bones');
             }
         })
-        let dogo = this.add.text(this.w * 0.3, this.w * 0.4, "⛵ Cerberus")
+        let dogo = this.add.text(this.w * 0.3, this.w * 0.4, "🐶🐶🐶 Cerberus")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
@@ -241,7 +241,7 @@ class Room3 extends AdventureScene {
                 if (this.hasItem("bones")) {
                     this.loseItem("bones");
                     this.showMessage("*Cerberus moves away*");
-                    dogo.setText("Hidden Door");
+                    dogo.setText("🐶🐶🐶🦴Hidden Door");
                     this.showMessage("Go through hidden Door")
                     this.gotoScene('Room4');
                 }
@@ -255,7 +255,7 @@ class Room4 extends AdventureScene {
     }
 
     onEnter() {
-        let sledgehammer = this.add.text(this.w * 0.5, this.w * 0.1, " 🪨  Sledgehammer")
+        let sledgehammer = this.add.text(this.w * 0.5, this.w * 0.1, " 🔨  Sledgehammer")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
@@ -272,7 +272,7 @@ class Room4 extends AdventureScene {
                 onComplete: () => sledgehammer.destroy()
             });
         })
-        let glass = this.add.text(this.w * 0.1, this.w * 0.15, "Glass Box")
+        let glass = this.add.text(this.w * 0.1, this.w * 0.15, "🪟Glass Box")
         .setFontSize(this.s * 2)
         .setInteractive()
         .on('pointerover', () => {
@@ -290,7 +290,7 @@ class Room4 extends AdventureScene {
                 this.gainItem('Trident');
             }
         })
-        let Throne = this.add.text(this.w * 0.3, this.w * 0.4, "⛵ Throne")
+        let Throne = this.add.text(this.w * 0.3, this.w * 0.4, "🪑 Throne")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
@@ -304,14 +304,14 @@ class Room4 extends AdventureScene {
                 if (this.hasItem("Trident")) {
                     this.loseItem("Trident");
                     this.showMessage("*You place the Trident*");
-                    Throne.setText("Throne and Trident");
+                    Throne.setText("🪑🍴Throne");
                     this.showMessage("A Gem magically appears in your hand")
                     this.gainItem("gem");
                     //this.gotoScene('Room4');
                 }
             })
 
-        let Alter = this.add.text(this.w * 0.1, this.w * 0.5, "⛵ Alter")
+        let Alter = this.add.text(this.w * 0.1, this.w * 0.5, "🟫🔥🟫 Alter")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
@@ -328,10 +328,11 @@ class Room4 extends AdventureScene {
                     Alter.setText("Sacrifice made");
                     this.showMessage("A magical door appears")
                     this.gainItem("Final Key");
+                    Alter.setAlpha(0);
                     Exit.setAlpha(1);
                 }
             })
-        let Exit = this.add.text(this.w * 0.3, this.w * 0.5, "⛵ Exit")
+        let Exit = this.add.text(this.w * 0.3, this.w * 0.5, "🚪🚪 Exit")
             .setAlpha(0)
             .setFontSize(this.s * 2)
             .setInteractive()
