@@ -54,7 +54,17 @@ class Demo1 extends AdventureScene {
         let ghost = this.add.text(this.w * 0.3, this.w * 0.3, "👻 Lost Soul")
             .setFontSize(this.s * 2)
             .setInteractive()
-            .on('pointerover', () => this.showMessage("A lost soul"))
+            .on('pointerover', () => {
+                this.showMessage("A lost soul");
+                this.tweens.add({
+                    targets: ghost,
+                    alpha: { from: 1, to: 0.5 },
+                    ease: 'Sine.InOut',
+                    duration: 500,
+                    repeat: -1,
+                    yoyo: true
+                  });
+                })
             .on('pointerdown', () => {
                 this.showMessage("They probably don't wanna talk.");
                 this.tweens.add({
@@ -105,6 +115,7 @@ class Demo1 extends AdventureScene {
             })
 
     }
+    
 }
 
 class Demo2 extends AdventureScene {
@@ -115,7 +126,17 @@ class Demo2 extends AdventureScene {
         let ghost = this.add.text(this.w * 0.3, this.w * 0.3, "👻 Lost Soul")
         .setFontSize(this.s * 2)
         .setInteractive()
-        .on('pointerover', () => this.showMessage("A lost soul"))
+        .on('pointerover', () => {
+            this.showMessage("A lost soul");
+            this.tweens.add({
+                targets: ghost,
+                alpha: { from: 1, to: 0.5 },
+                ease: 'Sine.InOut',
+                duration: 500,
+                repeat: -1,
+                yoyo: true
+              });
+            })
         .on('pointerdown', () => {
             this.showMessage("They probably don't wanna talk.");
             this.tweens.add({
@@ -374,9 +395,24 @@ class Outro extends Phaser.Scene {
     constructor() {
         super('outro');
     }
+    preload(){
+        this.load.path = "./assests/";
+        this.load.image("End", "End.png");
+        console.log("finish preload");
+    }
     create() {
-        this.add.text(50, 50, "That's all!").setFontSize(50);
+        let image = this.add.sprite(800, 450, 'End');
+        this.add.text(50, 50, "You Escaped!").setFontSize(50);
         this.add.text(50, 100, "Click anywhere to restart.").setFontSize(20);
+        this.add.text(50,150, "Credits\n Forked code by Adam Smith\n Additions by Brandon Christensen \n Emojis from emojipedia.org" )
+        this.tweens.add({
+            targets: image,
+            alpha: { from: 1, to: 0.5 },
+            ease: 'Sine.InOut',
+            duration: 500,
+            repeat: -1,
+            yoyo: true
+          });
         this.input.on('pointerdown', () => this.scene.start('intro'));
     }
 }
