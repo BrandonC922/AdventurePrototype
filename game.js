@@ -1,3 +1,49 @@
+class SceneA extends Phaser.Scene 
+{
+    constructor() {
+        super({key: 'SceneA'});
+    }
+    preload(){
+        this.load.path = "./assests/";
+        this.load.audio('MainTheme', ['LogoMusic.wav']);
+        this.load.image("BCSTUDIOS", "BCSTUDIOS.png");
+        console.log("finish preload");
+    }
+    create()
+    {
+
+        var theme = this.sound.add('MainTheme');
+        theme.play();
+        
+        
+        this.add.sprite(800, 450, 'BCSTUDIOS');
+
+        
+
+        this.input.once('pointerdown', function ()
+        {
+
+            console.log('From SceneA to SceneB');
+
+            this.scene.start('demo1');
+
+        }, this);
+
+        this.cameras.main.once('camerafadeincomplete', function (camera) {
+            camera.fadeOut(6000);
+        });
+
+        this.cameras.main.fadeIn(6000);
+
+        
+
+    }
+}
+
+
+
+
+
 class Demo1 extends AdventureScene {
     constructor() {
         super("demo1", "River Styx");
@@ -301,7 +347,7 @@ class Room4 extends AdventureScene {
                     this.loseItem("Final Key");
                     this.showMessage("*creek*");
                     Exit.setText("Freedom");
-                    this.gotoScene('intro');
+                    this.gotoScene('outro');
                 }
             })
    
@@ -318,7 +364,7 @@ class Intro extends Phaser.Scene {
         this.add.text(50,100, "Click to begin.").setFontSize(20);
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(1000, 0,0,0);
-            this.time.delayedCall(1000, () => this.scene.start('demo1'));
+            this.time.delayedCall(1000, () => this.scene.start('SceneA'));
         });
     }
 }
@@ -342,7 +388,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Demo1, Demo2, Room3, Room4, Outro],
+    scene: [Intro, SceneA, Demo1, Demo2, Room3, Room4, Outro],
     title: "Adventure Game",
 });
 
