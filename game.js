@@ -265,7 +265,7 @@ class Room4 extends AdventureScene {
                 }
             })
 
-        let Alter = this.add.text(this.w * 0.1, this.w * 0.8, "⛵ Alter")
+        let Alter = this.add.text(this.w * 0.1, this.w * 0.5, "⛵ Alter")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
@@ -281,8 +281,27 @@ class Room4 extends AdventureScene {
                     this.showMessage("*You place the gem*");
                     Alter.setText("Sacrifice made");
                     this.showMessage("A magical door appears")
-                    this.gainItem("gem");
-                    //this.gotoScene('Room4');
+                    this.gainItem("Final Key");
+                    Exit.setAlpha(1);
+                }
+            })
+        let Exit = this.add.text(this.w * 0.3, this.w * 0.5, "⛵ Exit")
+            .setAlpha(0)
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("Final Key")) {
+                    this.showMessage("It's the Exit");
+                } else {
+                    this.showMessage("It feels like something is here");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("Final Key")) {
+                    this.loseItem("Final Key");
+                    this.showMessage("*creek*");
+                    Exit.setText("Freedom");
+                    this.gotoScene('intro');
                 }
             })
    
