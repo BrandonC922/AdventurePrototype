@@ -7,6 +7,7 @@ class SceneA extends Phaser.Scene
         this.load.path = "./assests/";
         this.load.audio('MainTheme', ['LogoMusic.wav']);
         this.load.image("BCSTUDIOS", "BCSTUDIOS.png");
+        this.load.image("coin", "coin.png");
         console.log("finish preload");
     }
     create()
@@ -76,8 +77,14 @@ class Demo1 extends AdventureScene {
                     duration: 100
                 });
             });
-
-        let coin = this.add.text(this.w * 0.5, this.w * 0.1, "🪙 coin")
+        
+        this.imageObject = this.add.image(
+            this.w * 0.525,
+            this.w * 0.1,
+            'coin',
+        )
+        this.imageObject.setScale(1);
+        let coin = this.add.text(this.w * 0.5, this.w * 0.1, "coin")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
